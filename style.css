@@ -1,0 +1,47 @@
+/* Tabs */
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  background: #1f2937;
+  color: #9ca3af;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+.tab-btn:hover {
+  background: #374151;
+}
+.tab-btn.active {
+  background: #111827;
+  color: #3b82f6;
+  border-bottom: 2px solid #3b82f6;
+}
+
+/* Editors */
+.editor-box {
+  flex: 1;
+  border: none;
+}
+.CodeMirror {
+  height: 100%;
+  font-size: 14px;
+  font-family: monospace;
+  background: #1e1e1e;
+  color: #d4d4d4;
+}
+
+/* Icon Buttons */
+.icon-btn {
+  background: #1f2937;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #9ca3af;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+.icon-btn:hover {
+  background: #374151;
+  color: #fff;
+}

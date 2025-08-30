@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Realtime Code Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-gray-100 h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <header class="bg-gray-800 px-4 py-2 flex justify-between items-center shadow">
+    <h1 class="text-lg font-bold text-blue-400">⚡ Realtime Code Editor</h1>
+    <div class="flex gap-3 items-center">
+      <button id="runBtn" class="icon-btn" title="Run (Ctrl+Enter)">
+        <i data-lucide="play"></i>
+      </button>
+      <button id="saveBtn" class="icon-btn" title="Save (Ctrl+S)">
+        <i data-lucide="save"></i>
+      </button>
+      <button id="clearConsoleBtn" class="icon-btn" title="Clear Console">
+        <i data-lucide="broom"></i>
+      </button>
+      <label class="flex items-center gap-2 text-sm ml-3">
+        <input type="checkbox" id="autoRunToggle" class="w-4 h-4 accent-blue-500" checked>
+        Auto-run
+      </label>
+      <span id="status" class="text-gray-400 text-sm ml-2">Idle</span>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="flex flex-1 overflow-hidden">
+    <!-- Left: Editors -->
+    <section class="w-1/2 flex flex-col bg-gray-800">
+      <!-- Tabs -->
+      <div class="flex border-b border-gray-700">
+        <button data-tab="html" class="tab-btn active">HTML</button>
+        <button data-tab="css" class="tab-btn">CSS</button>
+        <button data-tab="js" class="tab-btn">JavaScript</button>
+      </div>
+      <!-- Editors -->
+      <div id="htmlEditor" class="editor-box"></div>
+      <div id="cssEditor" class="editor-box hidden"></div>
+      <div id="jsEditor" class="editor-box hidden"></div>
+    </section>
+
+    <!-- Right: Preview + Console -->
+    <section class="w-1/2 flex flex-col bg-gray-900">
+      <!-- Live Preview -->
+      <div class="flex-1 bg-white rounded-t-lg overflow-hidden">
+        <iframe id="preview" class="w-full h-full"></iframe>
+      </div>
+      <!-- Console -->
+      <div id="consolePanel" class="bg-black text-green-400 text-sm p-2 h-36 overflow-y-auto font-mono rounded-b-lg">
+        Console output...
+      </div>
+    </section>
+  </main>
+
+  <!-- Status Bar -->
+  <footer class="bg-gray-800 text-gray-400 text-sm px-4 py-2 flex justify-between items-center">
+    <span id="cursorPos">Ln 1, Col 1</span>
+    <span id="firebaseStatus">🔴 Offline</span>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+  <script>
+    lucide.createIcons(); // render icons
+  </script>
+</body>
+</html>
